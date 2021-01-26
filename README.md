@@ -10,37 +10,22 @@ The Greenhouse is a web app that serves as a plant manager, allowing users to ad
 ## Data Model
 
 
-The application will store Users, Plants and Plant Details
+The application will store Plants and Plant Details
 
-* users can have multiple plants (via references)
 * each plant can have multiple informative details (by embedding)
 
 
-An Example User:
+An Example Plant with Embedded Details:
 
 ```javascript
-{
-  username: "ivannpe",
-  hash: // a password hash,
-  plants: // an array of references to plant information
-}
-```
-
-An Example List with Embedded Items:
-
-```javascript
-{
-  user: // a reference to a User object
-  name: "Plants",
-  plants: [
-    { name: "Pothos", nickname: "Beauty",    
-        image_url: "imagelink", space: "Indoors", 
-        waterFreq: "Weekly", light: "Direct", watered: true},  
-    { name: "Albies Alba", nickname: "Margo",    
-        image_url: "imagelink", space: "Outdoors", 
-        waterFreq: "Bi-Weekly", light: "Direct", watered: false},
-  ],
-}
+const Plant = new mongoose.Schema({
+  name: {type: String, required: true},
+  nickname: {type: String, required: false},
+  image_url: {type: String, required: false},
+  space: {type: String, required: false},
+  waterFreq: {type: String, required: false},
+  light: {type: String, required: false}
+});
 ```
 
 
@@ -70,11 +55,9 @@ An Example List with Embedded Items:
 ## User Stories or Use Cases
 
 
-1. as non-registered user, I can register a new account with the site and learn about site features
-2. as a user, I can sign in to the site
-3. as a user, I can add a plant
-4. as a user, I can view all of the plants I have added
-5. as a user, I can search in the toolkit to learn more about how to take care of my plants  
+1. as a user, I can add a plant
+2. as a user, I can view all of the plants I have added
+3. as a user, I can search in the toolkit to learn more about how to take care of my plants  
 
 
 
