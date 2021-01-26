@@ -44,9 +44,6 @@ An Example List with Embedded Items:
 ```
 
 
-## [Link to Commented First Draft Schema](db.js) 
-
-
 ## Wireframes
 
 /home - page for site information and features
@@ -77,28 +74,10 @@ An Example List with Embedded Items:
 2. as a user, I can sign in to the site
 3. as a user, I can add a plant
 4. as a user, I can view all of the plants I have added
-5. as a user, I can information to plants I have already created
-6. as a user, I can delete plants that I have added  
-7. as a user, I can search in the toolkit to learn more about how to take care of my plants  
-8. as a user, I can search from a database of plants and add them to my own plants  
-9. as a user, I can log out
+5. as a user, I can search in the toolkit to learn more about how to take care of my plants  
 
-## Research Topics
-
-* (5 points) Integrate user authentication
-    * I will be integrating user authentication using passport.js for users to have secure access to their plant info from anywhere they access the site
-* (3 points) External API - Trefle
-    * I will be using the Trefle API for the search plants page to get plant information and add them to your own plant library
-    * Re-assigned value because it is a not commonly used api and it was very time consuming to work with.
-
-8 points total out of 8 required points 
-
-
-## [Link to Initial Main Project File](app.js) 
 
 
 ## Annotations / References Used
 
-
-1. [passport.js authentication docs](http://passportjs.org/docs)
-2. [Trefly API Documentation](https://docs.trefle.io/)  
+1. [Trefly API Documentation](https://docs.trefle.io/)  
