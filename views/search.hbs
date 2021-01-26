@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+{{!-- https://www.w3schools.com/howto/howto_js_topnav.asp --}}
+<style>
+    .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 75px;
+    }
+
+    .search-container {
+        float: right;
+    }
+
+    .search-container input[type=text] {
+        padding: 6px;
+        margin-top: 8px;
+        margin-right: 16px;
+        font-size: 17px;
+        border: 1 px;
+        cursor: pointer;
+    }
+
+    .search-container button {
+        float: right;
+        padding:8px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: black;
+        font-size: 17px;
+        color: #f2f2f2;
+        border: none;
+        cursor: pointer;
+    }
+
+    .search-container button:hover {
+    background: darkgray;
+    }
+
+
+}
+ .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+
+  .plantCards{
+
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+
+  }
+</style>
+<head>
+	{{!-- <link rel="stylesheet" href="/stylesheets/style.css"> --}}
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Sue+Ellen+Francisco"/>
+	<meta charset="utf-8">
+<title></title>
+
+</head>
+
+<body>
+    <div class = "topbar">
+        <h1 style = "float:left; font-family: Sue Ellen Francisco;font-size: 50px">search</h1>
+
+
+          <div class="search-container">
+            <form method = "POST">
+            <input type="text" placeholder="Enter Keyword..." name="searchQuery">
+            <button type="submit" value="Submit">search</button>
+            </form>
+        </div>
+    </div>
+    
+
+<div class ="plantCards">
+  {{#each results}}
+  <div class="card">
+    <img src="{{{image_url}}}" style="width:300px">
+    <h1>{{common_name}}</h1>
+    <p class="title">{{scientific_name}}</p>
+    <p>{{family_common_name}}</p>
+    <p>{{year}}</p>
+    {{!-- <p><button>Edit Plant</button></p> --}}
+  </div>
+  {{/each}}
+</div>
+</body>
+</html>
+
+

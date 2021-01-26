@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+{{!-- https://www.w3schools.com/howto/howto_js_topnav.asp --}}
+<style>
+    .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 75px;
+    }
+    .open-button {
+        background-color: black;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus{
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: black;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color:black;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+
+.open-filter-button {
+    background-color: black;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The popup form - hidden by default */
+.filter-form-popup {
+  display: none;
+  position: fixed;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.filter-form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.filter-form-container input[type=text]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.filter-form-container input[type=text]:focus{
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.filter-form-container .btn {
+  background-color: black;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.filter-form-container .cancel {
+  background-color:black;
+}
+
+/* Add some hover effects to buttons */
+.filter-form-container .btn:hover, .open-filter-button:hover {
+  opacity: 1;
+}
+ .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+
+  .plantCards{
+
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+
+  }
+</style>
+<head>
+	{{!-- <link rel="stylesheet" href="/stylesheets/style.css"> --}}
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Sue+Ellen+Francisco"/>
+	<meta charset="utf-8">
+<title></title>
+
+</head>
+
+<body>
+    <div class = "topbar">
+        <h1 style = "float:left; font-family: Sue Ellen Francisco;font-size: 50px">my plants</h1>
+        <div class = "buttons">
+            <button style="font-size: 17px;" class="open-filter-button" onclick="openFilterForm()">filter</button>
+            <button style="font-size: 17px;" class="open-button" onclick="openForm()">add plant</button>
+        </div>
+    </div>
+    
+    <div class="form-popup" id="myForm">
+        <form class="form-container" method = "POST">
+            Species Name: <input type="text" name="name">
+            Nickname: <input type="text" name="nickname">
+            Image: <input type="text" name="image_url">
+            Space: <select name="space">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Indoors">Indoors</option>
+                <option value="Outdoors">Outdoors</option>
+            </select>
+            Water Frequency: <select name="waterFreq">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-Weekly">Bi-Weekly</option>
+                <option value="Monthly">Monthly</option>
+            </select>
+            Light Type: <select name="light">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Direct">Direct</option>
+                <option value="Indirect">Indirect</option>
+            </select>
+            <button type="submit" class="btn" >add plant</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">close</button>
+        </form>
+    </div>
+
+    <div class="filter-form-popup" id="myFilterForm">
+        <form class="filter-form-container" method = "GET">
+            Species Name: <input type="text" name="name">
+            Nickname: <input type="text" name="nickname">
+            Space: <select name="space">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Indoors">Indoors</option>
+                <option value="Outdoors">Outdoors</option>
+            </select>
+            Water Frequency: <select name="waterFreq">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-Weekly">Bi-Weekly</option>
+                <option value="Monthly">Monthly</option>
+            </select>
+            Light Type: <select name="light">
+                <option value = "" selected disabled hidden> Choose Option</option>
+                <option value="Direct">Direct</option>
+                <option value="Indirect">Indirect</option>
+            </select>
+            <button type="submit" class="btn" >filter plants</button>
+            <button type="button" class="btn cancel" onclick="closeFilterForm()">close</button>
+        </form>
+    </div>
+
+<div class ="plantCards">
+  {{#each results}}
+  <div class="card">
+    <img src="{{{image_url}}}" style="width:300px">
+    <h1>{{nickname}}</h1>
+    <p class="title">{{name}}</p>
+    <p>{{space}}</p>
+    <p>{{light}}</p>
+    {{!-- <p><button>Edit Plant</button></p> --}}
+  </div>
+  {{/each}}
+</div>
+<script>
+function openFilterForm() {
+  document.getElementById("myFilterForm").style.display = "block";
+}
+
+function closeFilterForm() {
+  document.getElementById("myFilterForm").style.display = "none";
+}
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+</body>
+</html>
+

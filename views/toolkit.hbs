@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+{{!-- https://www.w3schools.com/howto/howto_js_topnav.asp --}}
+<style>
+    .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 75px;
+    }
+    .open-button {
+        background-color: black;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+    }
+    /* The popup form - hidden by default */
+    .form-popup {
+        display: none;
+        position: fixed;
+        right: 15px;
+        border: 3px solid #f1f1f1;
+        z-index: 9;
+    }
+    /* Add styles to the form container */
+    .form-container {
+        max-width: 300px;
+        padding: 10px;
+        background-color: white;
+    }
+    /* Full-width input fields */
+    .form-container input[type=radio]{
+        width: 40%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: black;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom:10px;
+        opacity: 0.8;
+    }
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color:black;
+    }
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
+     /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+    .flip-card {
+        background-color: transparent;
+        width: 300px;
+        height: 200px;
+        border: 1px solid #f1f1f1;
+        perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    }
+
+    /* This container is needed to position the front and back side */
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+    }
+
+    /* Do an horizontal flip when you move the mouse over the flip box container */
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    /* Position the front and back side */
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari */
+        backface-visibility: hidden;
+    }
+
+    /* Style the front side (fallback if image is missing) */
+    .flip-card-front {
+        background-color: #bbb;
+        color: black;
+    }
+
+    /* Style the back side */
+    .flip-card-back {
+        background-color: black;
+        color: white;
+        transform: rotateY(180deg);
+        opacity: 80%;
+        width:300px;
+        height:400px;
+    } 
+    .cards{
+
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+
+
+    }
+    .cardbutton{
+        appearance: button;
+        color: white;
+    }
+
+</style>
+<head>
+	{{!-- <link rel="stylesheet" href="/stylesheets/style.css"> --}}
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Sue+Ellen+Francisco"/>
+	<meta charset="utf-8">
+<title></title>
+
+</head>
+
+<body>
+    <div class = "topbar">
+        <h1 style = "float:left; font-family: Sue Ellen Francisco;font-size: 50px">tool kit</h1>
+
+        <button style="font-size: 17px;" class="open-button" onclick="openForm()">filter</button>
+    </div>
+    
+    <div class="form-popup" id="myForm">
+        <form class="form-container" method = "GET">
+            <input type="radio" id="Watering" name="subject" value="Watering">
+            <label for="Watering">Watering</label>
+
+            <input type="radio" id="Light" name="subject" value="Light">
+            <label for="Light">Light Level</label>
+
+            <input type="radio" id="Environment" name="subject" value = "Environment">
+            <label for="Environment">Environment</label>
+
+            <input type="radio" id="Maintenance" name="subject" value = "Maintenance">
+            <label for="Maintenance">Maintenance</label>
+
+            <button type="submit" class="btn" >filter</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">close</button>
+        </form>
+    </div>
+
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+{{!-- https://www.w3schools.com/howto/howto_css_flip_card.asp --}}
+<div class= "cards">
+    {{#each filteredtoolkit}}
+    <div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+        <img src="{{{image}}}" style="width:300px;height:400px;">
+        </div>
+        <div class="flip-card-back">
+        <h1>{{subject}}</h1>
+        <p>{{details}}</p>
+        <a href="{{{learnmore}}}" class="cardbutton">Visit Guide</a>
+        </div>
+    </div>
+    </div> 
+    {{/each}}
+</div>
+
+</html>
